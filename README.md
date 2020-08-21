@@ -10,3 +10,9 @@ vue-router：路由管理，实现路由的跳转
 axios：发起http请求
 
 Express：处理跨域请求问题
+
+Quasar：基于Vuejs的UI框架
+
+没有使用Vue CLI 3 Quasar插件的方法，直接使用了Quasar CLI来构建
+
+## 使用 Build Setup
