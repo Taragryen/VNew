@@ -80,7 +80,7 @@ cfg.module.rules.push({
       open: true, // opens browser window automatically
       proxy: {
         '/api': {
-          target: 'https://api.jisuapi.com',
+          target: 'https://way.jd.com/jisuapi',
           secure: false,
           changeOrigin: true,
           pathRewrite: {

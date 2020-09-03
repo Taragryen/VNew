@@ -2,13 +2,24 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated reveal class="bg-white" split no-wrap>
       <q-toolbar>
-
         <q-toolbar-title class="text-primary">
           VNews
           <q-badge transparent align="middle" color="primary">
             v1.0.0
           </q-badge>
         </q-toolbar-title>
+
+        <q-btn icon="search" color="primary" round flat>
+          <q-popup-edit v-model="quest">
+            <q-input
+              v-model="quest"
+              dense
+              autofocus
+              counter
+              placeholder="search"
+            />
+          </q-popup-edit>
+        </q-btn>
 
         <type-list />
 
@@ -22,7 +33,6 @@
             class="text-primary"
           />
         </div>
-
       </q-toolbar>
     </q-header>
 
@@ -35,27 +45,29 @@
         :offset="[18, 18]"
         :duration="10"
       >
-        <q-btn fab icon="keyboard_arrow_up" color="primary"/>
+        <q-btn fab icon="keyboard_arrow_up" color="primary" />
       </q-page-scroller>
     </q-page-container>
 
-    <!-- <div v-html="content"></div> -->
     <q-space />
 
   </q-layout>
 </template>
 
 <script>
-import TypeList from 'components/TypeList.vue'
+import TypeList from "components/TypeList.vue";
 
 export default {
   name: "MainLayout",
   data() {
     return {
       DarkMode: false,
+      quest: ""
     };
   },
-  components: { TypeList },
+  components: {
+    TypeList,
+  },
   methods: {
     toPageTop: function() {}
   },
@@ -66,4 +78,3 @@ export default {
   }
 };
 </script>
-

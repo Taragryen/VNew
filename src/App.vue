@@ -5,9 +5,9 @@
   </div>
 </template>
 <script>
+import {mapActions, mapState} from 'vuex';
 
 export default {
-  name: "App",
   data() {
     return {
       platform: this.$q.platform.is.desktop,
@@ -29,6 +29,12 @@ export default {
         this.$router.push("/limit");
       }
     }
+  },
+  methods: {
+    ...mapActions(["setNewsList"])
+  },
+  created() {
+    this.setNewsList(this.$store.state.module.channel);
   }
 };
 </script>

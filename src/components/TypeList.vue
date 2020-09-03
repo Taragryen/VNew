@@ -5,7 +5,7 @@
         <q-scroll-area
           :thumb-style="thumbStyle"
           :bar-style="barStyle"
-          style="height: 100%; max-width: 300px;"
+          style="height: 290px; max-width: 300px;"
         >
           <q-item
             clickable
@@ -14,7 +14,7 @@
             v-for="(type, index) in typelist"
             :key="index"
           >
-            <q-item-section>
+            <q-item-section class="full-width">
               <q-item-label>{{ type }}</q-item-label>
             </q-item-section>
           </q-item>
@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import {mapGetters, mapActions} from "vuex"
+
 export default {
   name: "TypeList",
   data() {
@@ -55,7 +57,8 @@ export default {
   methods: {
     changeType: function(type) {
       this.type = type;
-    }
+    },
+    ...mapActions(['setNewsList','setChannel'])
   },
   computed: {
     thumbStyle() {
@@ -76,7 +79,13 @@ export default {
         width: "9px",
         opacity: 0.2
       };
+    },
+  },
+  watch: {
+    type: function(val) {
+      this.setChannel(val);
+      this.setNewsList(val);
     }
-  }
+  },
 };
 </script>
