@@ -31,9 +31,10 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["setNewsList"])
+    ...mapActions(["setNewsList", "setIsLoading"])
   },
   created() {
+    this.setIsLoading(true);
     this.setNewsList(this.$store.state.module.channel);
   }
 };

@@ -19,6 +19,7 @@
               placeholder="search"
             />
           </q-popup-edit>
+          <q-tooltip anchor="bottom middle" self="top middle" content-class="bg-primary" content-style="font-size: 13px;">search</q-tooltip>
         </q-btn>
 
         <type-list />
@@ -28,16 +29,19 @@
             v-model="DarkMode"
             checked-icon="check"
             color="primary"
-            label="Dark Mode"
             unchecked-icon="clear"
             class="text-primary"
-          />
+          >
+            <q-icon name="fas fa-moon" />
+            <q-tooltip anchor="bottom middle" self="top middle" content-class="bg-primary" content-style="font-size: 13px;">Dark Mode</q-tooltip>
+          </q-toggle>
         </div>
       </q-toolbar>
     </q-header>
 
     <q-page-container>
-      <router-view />
+      <CardSkeleton v-if="isLoading"/>
+      <router-view v-else/>
 
       <q-page-scroller
         position="bottom-right"
@@ -56,6 +60,8 @@
 
 <script>
 import TypeList from "components/TypeList.vue";
+import CardSkeleton from "components/CardSkeleton.vue"
+import {mapGetters, mapActions} from "vuex";
 
 export default {
   name: "MainLayout",
@@ -67,14 +73,21 @@ export default {
   },
   components: {
     TypeList,
+    CardSkeleton
   },
   methods: {
-    toPageTop: function() {}
+    toPageTop: function() {},
+    ...mapActions(["setIsLoading"])
   },
   watch: {
     DarkMode: function(val) {
       this.$q.dark.toggle();
     }
-  }
+  },
+  computed: {
+    ...mapGetters({
+      isLoading: 'getIsLoading'
+    })
+  },
 };
 </script>

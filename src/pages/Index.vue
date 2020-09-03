@@ -1,13 +1,17 @@
 <template>
-  <div class="q-pa-md">
+  <div class="q-pa-md row items-start q-gutter-lg justify-around">
 
-    <news-card />
+    <news-card 
+      v-for="(item, index) in NewsList"
+      :key="index"
+      v-bind="item"
+    />
 
   </div>
 </template>
 
 <script>
-// import CardSkeleton from "components/CardSkeleton.vue";
+import {mapActions, mapGetters} from "vuex";
 import NewsCard from "components/NewsCard.vue";
 
 export default {
@@ -17,10 +21,13 @@ export default {
   },
   data() {
     return {
-      slide: "style",
-      lorem:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque voluptatem totam, architecto cupiditate officia rerum, error dignissimos praesentium libero ab nemo."
+      slide: "style"
     };
+  },
+  computed: {
+    ...mapGetters({
+      NewsList: 'getNewsList'
+    })
   }
 };
 </script>

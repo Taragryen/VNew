@@ -11,8 +11,8 @@ export const setNewsList = ({commit}, channel) => {
         }
     })
     .then(res => {
-        console.log(res.data.result.result)
-        commit('SET_NEWSLIST', res.data.result.result.list)
+        commit('SET_NEWSLIST', res.data.result.result.list);
+        commit('SET_ISLOADING', false);
     })
     .catch(err => {
         console.error(err); 
@@ -21,4 +21,8 @@ export const setNewsList = ({commit}, channel) => {
 
 export const setChannel = ({commit}, channel) => {
     commit('SET_CHANNEL', channel);
+}
+
+export const setIsLoading = ({commit}, isLoading) => {
+    commit('SET_ISLOADING', isLoading)
 }

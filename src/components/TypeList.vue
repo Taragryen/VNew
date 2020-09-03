@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md">
+  <div>
     <q-btn-dropdown color="primary" flat :label="type" no-caps>
       <q-list padding class="text-primary">
         <q-scroll-area
@@ -21,6 +21,7 @@
         </q-scroll-area>
       </q-list>
     </q-btn-dropdown>
+    <q-tooltip anchor="bottom middle" self="top middle" content-class="bg-primary" content-style="font-size: 13px;">channel</q-tooltip>
   </div>
 </template>
 
@@ -58,7 +59,7 @@ export default {
     changeType: function(type) {
       this.type = type;
     },
-    ...mapActions(['setNewsList','setChannel'])
+    ...mapActions(['setNewsList', 'setChannel', 'setIsLoading'])
   },
   computed: {
     thumbStyle() {
@@ -83,6 +84,7 @@ export default {
   },
   watch: {
     type: function(val) {
+      this.setIsLoading(true);
       this.setChannel(val);
       this.setNewsList(val);
     }

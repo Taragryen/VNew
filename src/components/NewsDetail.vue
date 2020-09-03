@@ -9,9 +9,9 @@
       no-focus
     >
       <q-card>
-        <q-card-section>
+        <q-card-section style="overflow:hidden">
           <span class="text-h6">{{title}}</span>
-          <span class="text-h7 q-pr-md absolute-bottom-right">{{src}}</span>
+          <!-- <span class="text-h7 q-pr-md absolute-bottom-right">{{src}}</span> -->
         </q-card-section>
 
         <q-separator />

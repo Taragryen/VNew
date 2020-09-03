@@ -1,21 +1,21 @@
 <template>
-  <div class="q-pa-md row items-start q-gutter-lg justify-around">
-    <q-intersection
-      v-for="(item, index) in NewsList"
-      :key="index"
-      transition="scale"
-      class="fixed-hw"
-    >
+  <div>
+    <q-intersection transition="scale" class="fixed-hw">
       <q-card
         class="my-card suspension-transition col-xs-12 col-sm-6 col-md-3"
-        @click="openNewsDetail(item.title, item.src, item.content)"
+        @click="openNewsDetail(title, src, content)"
       >
         <q-img
-          :src="item.pic"
+          class="test"
+          :src="pic"
           spinner-color="primary"
           spinner-size="70px"
           style="height: 180px; object-fit: cover"
         >
+          <div class="absolute-full text-subtitle1 text-left show">
+            <p>{{ src }}</p>
+            <p>{{ time }}</p>
+          </div>
           <template v-slot:error>
             <div
               class="absolute-full flex flex-center bg-white text-black"
@@ -28,7 +28,7 @@
 
         <q-card-section>
           <div class="text-h6 card-title">
-            {{ item.title }}
+            {{ title }}
           </div>
         </q-card-section>
 
@@ -51,13 +51,14 @@
       :title="title"
       :src="src"
       v-on:closeNewsDetail="closeNewsDetail"
-    ></NewsDetail>
+    >
+    </NewsDetail>
   </div>
 </template>
 
 <script>
 import NewsDetail from "components/NewsDetail.vue";
-import {mapGetters} from "vuex"
+import { mapGetters } from "vuex";
 
 export default {
   name: "NewsCard",
@@ -66,11 +67,30 @@ export default {
   },
   data() {
     return {
-      dialog: false,
-      content: "",
-      src: "",
-      title: ""
+      dialog: false
     };
+  },
+  props: {
+    title: {
+      type: String,
+      required: true
+    },
+    src: {
+      type: String,
+      required: true
+    },
+    pic: {
+      type: String,
+      required: true
+    },
+    content: {
+      type: String,
+      required: true
+    },
+    time: {
+      type: String,
+      required: true
+    }
   },
   methods: {
     openNewsDetail(title, src, content) {
@@ -82,11 +102,6 @@ export default {
     closeNewsDetail(val) {
       this.dialog = val;
     }
-  },
-  computed: {
-    ...mapGetters({
-      NewsList: 'getNewsList'
-    })
   }
 };
 </script>
@@ -100,6 +115,16 @@ export default {
   cursor: pointer;
   transform: perspective(1px) scale(1.03);
   transition: all 0.4s;
+}
+
+.my-card:hover .test .show {
+  transition: all 0.65s;
+  display: block;
+}
+
+.show {
+  transition: all 0.65s;
+  display: none;
 }
 
 .my-card {
