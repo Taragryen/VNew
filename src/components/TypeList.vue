@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-btn-dropdown color="primary" flat :label="type" no-caps>
+    <q-btn-dropdown color="primary" flat :label="currentChannel" no-caps>
       <q-list padding class="text-primary">
         <q-scroll-area
           :thumb-style="thumbStyle"
@@ -10,12 +10,12 @@
           <q-item
             clickable
             v-close-popup
-            @click="changeType(type)"
-            v-for="(type, index) in typelist"
+            @click="changeChannel(channel)"
+            v-for="(channel, index) in channelList"
             :key="index"
           >
             <q-item-section class="full-width">
-              <q-item-label>{{ type }}</q-item-label>
+              <q-item-label>{{ channel }}</q-item-label>
             </q-item-section>
           </q-item>
         </q-scroll-area>
@@ -32,7 +32,7 @@ export default {
   name: "TypeList",
   data() {
     return {
-      typelist: [
+      channelList: [
         "头条",
         "新闻",
         "国内",
@@ -51,13 +51,12 @@ export default {
         "育儿",
         "健康",
         "自制"
-      ],
-      type: "头条"
+      ]
     };
   },
   methods: {
-    changeType: function(type) {
-      this.type = type;
+    changeChannel: function(channel) {
+      this.setChannel(channel);
     },
     ...mapActions(['setNewsList', 'setChannel', 'setIsLoading'])
   },
@@ -81,9 +80,13 @@ export default {
         opacity: 0.2
       };
     },
+
+    ...mapGetters({
+      currentChannel: 'getChannel'
+    })
   },
   watch: {
-    type: function(val) {
+    currentChannel: function(val) {
       this.setIsLoading(true);
       this.setChannel(val);
       this.setNewsList(val);

@@ -11,14 +11,13 @@
       <q-card>
         <q-card-section style="overflow:hidden">
           <span class="text-h6">{{title}}</span>
-          <!-- <span class="text-h7 q-pr-md absolute-bottom-right">{{src}}</span> -->
         </q-card-section>
 
         <q-separator />
 
         <q-card-section
           style="max-height: 80vh;"
-          class="scroll"
+          class="scroll text-body1"
           v-html="content"
         >
         </q-card-section>

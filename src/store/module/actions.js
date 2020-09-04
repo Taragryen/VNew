@@ -7,7 +7,7 @@ export const setNewsList = ({commit}, channel) => {
             channel: channel,
             num: 20,
             start: 0,
-            appkey: "69e94e196685c1e1b1890e7c691ed168"
+            appkey: appkey
         }
     })
     .then(res => {
